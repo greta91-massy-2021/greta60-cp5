@@ -3,13 +3,12 @@
 <?php
 include_once('commun.inc.php'); 
 session_start();
-var_dump($_SESSION);
 if(array_key_exists('visites',$_SESSION)){
   $auteurs_vus='';
   foreach($_SESSION['visites'] as $numero=>$time){
-    $auteurs_vus=$auteurs_vus . "-".$auteurs[$numero];//auteur1-auteur2-
+    $auteurs_vus=$auteurs_vus.$auteurs[$numero] . "-";//auteur1-auteur2-
   }
-  $auteurs_vus=trim($auteurs_vus,'-');
+  $auteurs_vus=rtrim($auteurs_vus,'-');
 }
 ?>
 <!DOCTYPE html>
@@ -37,7 +36,6 @@ if(array_key_exists('visites',$_SESSION)){
     </div>
     <?php
   if(!empty($auteurs_vus)):
-    var_dump($auteurs_vus)
  ?>
      <p>les trois auteurs consultés: <?php echo $auteurs_vus  ?></p>
      <?php

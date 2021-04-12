@@ -8,12 +8,9 @@ if (is_int($numero) and array_key_exists($numero,$auteurs)) {
   session_start();
   //memoriser le temps unix de la derniere visite de l'utilisateur
   $_SESSION['visites'][$numero]=time();
-  // $temp= array($numero=>time());
-  // array_splice($_SESSION['visites'],$numero,1, $temp);
   //trier  les trois premiers éléments du tableau des auteurs visités, attention a preserver les clés.
-    asort($_SESSION['visites'], SORT_NUMERIC);
+    arsort($_SESSION['visites'], SORT_NUMERIC);
     $_SESSION['visites']=array_slice($_SESSION['visites'], 0,3,true);
-    var_dump($_SESSION);
 }
 ?>
 <!DOCTYPE html>
