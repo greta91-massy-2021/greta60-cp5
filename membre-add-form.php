@@ -23,7 +23,18 @@
         <label for="taille">Taille</label>
         <input type="number" class="form-control" id="taille" name="taille" step="0.01">
       </div>
-      <button type="submit" class="btn btn-primary">Envoyer</button>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="genre" id="genre_homme" value="Homme">
+        <label class="form-check-label" for="genre">Homme</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="genre" id="genre_femme" value="Femme">
+        <label class="form-check-label" for="genre">Femme</label>
+      </div>
+      <div class="form-group my-3">
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+      </div>
+      
     </form>
   </div>
   
