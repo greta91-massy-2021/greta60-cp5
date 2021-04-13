@@ -1,6 +1,23 @@
 <?php 
   session_start();
-  var_dump($_SESSION["membre-add-form-donnees"]);
+  //vérifier si $_SESSION["membre-add-form-donnees"] n'est pas vide
+  $prenom = "";
+  $age = "";
+  $taille = "";
+  $genre = "";
+  $isHomme = false;
+  $isFemme = false;
+  if(isset($_SESSION["membre-add-form-donnees"]) && count($_SESSION["membre-add-form-donnees"]) > 0){
+    $prenom = $_SESSION["membre-add-form-donnees"]["prenom"];
+    $age = $_SESSION["membre-add-form-donnees"]["age"];
+    $taille = $_SESSION["membre-add-form-donnees"]["taille"];
+    $genre = $_SESSION["membre-add-form-donnees"]["genre"];
+    //$_SESSION["membre-add-form-donnees"] = null;
+    unset($_SESSION["membre-add-form-donnees"]);
+    $isHomme = $genre == "Homme" ? true : false;
+    $isFemme = $genre == "Femme" ? true : false;
+  }
+  //var_dump($_SESSION["membre-add-form-donnees"]);
   var_dump($_SESSION["membre-add-form-erreurs"]);
 ?>
 <!DOCTYPE html>
@@ -18,22 +35,29 @@
     <form action="membre-add-form-traitement.php" method="post">
       <div class="form-group">
         <label for="prenom">Prénom</label>
-        <input type="text" class="form-control" id="prenom" name="prenom">
+        <input type="text" class="form-control" id="prenom" name="prenom" 
+                              value="<?php echo $prenom ?>">
       </div>
       <div class="form-group">
         <label for="age">Age</label>
-        <input type="number" class="form-control" id="age" name="age">
+        <input type="number" class="form-control" id="age" name="age"
+                              value="<?php echo $age ?>">
       </div>
       <div class="form-group">
         <label for="taille">Taille</label>
-        <input type="number" class="form-control" id="taille" name="taille" step="0.01">
+        <input type="number" class="form-control" id="taille" name="taille" step="0.01"
+                              value="<?php echo $taille ?>">
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="genre" id="genre_homme" value="Homme">
+        <input class="form-check-input" type="radio" name="genre" id="genre_homme" value="Homme" <?php if ($isHomme) {
+          echo "checked";
+        }?>>
         <label class="form-check-label" for="genre">Homme</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="genre" id="genre_femme" value="Femme">
+        <input class="form-check-input" type="radio" name="genre" id="genre_femme" value="Femme" <?php if ($isFemme) {
+          echo "checked";
+        }?>>
         <label class="form-check-label" for="genre">Femme</label>
       </div>
       <div class="form-group my-3">
