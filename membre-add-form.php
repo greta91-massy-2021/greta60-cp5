@@ -1,3 +1,8 @@
+<?php 
+  session_start();
+  var_dump($_SESSION["membre-add-form-donnees"]);
+  var_dump($_SESSION["membre-add-form-erreurs"]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
