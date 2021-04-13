@@ -8,6 +8,7 @@
   $isHomme = false;
   $isFemme = false;
   if(isset($_SESSION["membre-add-form-donnees"]) && count($_SESSION["membre-add-form-donnees"]) > 0){
+    //var_dump($_SESSION["membre-add-form-donnees"]);
     $prenom = $_SESSION["membre-add-form-donnees"]["prenom"];
     $age = $_SESSION["membre-add-form-donnees"]["age"];
     $taille = $_SESSION["membre-add-form-donnees"]["taille"];
@@ -17,8 +18,14 @@
     $isHomme = $genre == "Homme" ? true : false;
     $isFemme = $genre == "Femme" ? true : false;
   }
-  //var_dump($_SESSION["membre-add-form-donnees"]);
-  var_dump($_SESSION["membre-add-form-erreurs"]);
+  if (isset($_SESSION["membre-add-form-erreurs"]) && count($_SESSION["membre-add-form-erreurs"]) > 0) {
+    // var_dump($_SESSION["membre-add-form-erreurs"]);
+    $prenomMsgErreur = isset($_SESSION["membre-add-form-erreurs"]["prenom"]) ? $_SESSION["membre-add-form-erreurs"]["prenom"] : '';
+    $ageMsgErreur = isset($_SESSION["membre-add-form-erreurs"]["age"]) ? $_SESSION["membre-add-form-erreurs"]["age"] : '';
+    $tailleMsgErreur = isset($_SESSION["membre-add-form-erreurs"]["taille"]) ? $_SESSION["membre-add-form-erreurs"]["taille"] : '';
+    $genreMsgErreur = isset($_SESSION["membre-add-form-erreurs"]["genre"]) ? $_SESSION["membre-add-form-erreurs"]["genre"] : '';
+    unset($_SESSION["membre-add-form-erreurs"]); //flash message
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,30 +42,42 @@
     <form action="membre-add-form-traitement.php" method="post">
       <div class="form-group">
         <label for="prenom">Prénom</label>
-        <input type="text" class="form-control" id="prenom" name="prenom" 
-                              value="<?php echo $prenom ?>">
+        <input type="text" class="form-control <?php if(isset($prenomMsgErreur) && !empty($prenomMsgErreur)) echo "is-invalid"; ?>" id="prenom" name="prenom" 
+                              value="<?php echo $prenom ?>" aria-describedby="prenomFeedback" >
+        <div id="prenomFeedback" class="invalid-feedback">
+          <?php echo $prenomMsgErreur; ?>
+        </div>
       </div>
       <div class="form-group">
         <label for="age">Age</label>
-        <input type="number" class="form-control" id="age" name="age"
-                              value="<?php echo $age ?>">
+        <input type="number" class="form-control <?php if(isset($ageMsgErreur) && !empty($ageMsgErreur)) echo "is-invalid"; ?>" id="age" name="age"
+                              value="<?php echo $age ?>" aria-describedby="ageFeedback">
+        <div id="ageFeedback" class="invalid-feedback">
+          <?php echo $ageMsgErreur; ?>
+        </div>
       </div>
       <div class="form-group">
         <label for="taille">Taille</label>
-        <input type="number" class="form-control" id="taille" name="taille" step="0.01"
-                              value="<?php echo $taille ?>">
+        <input type="number" class="form-control <?php if(isset($tailleMsgErreur) && !empty($tailleMsgErreur)) echo "is-invalid"; ?>" id="taille" name="taille" step="0.01"
+                              value="<?php echo $taille ?>" aria-describedby="tailleFeedback">
+        <div id="tailleFeedback" class="invalid-feedback">
+          <?php echo $tailleMsgErreur; ?>
+        </div>
       </div>
-      <div class="form-check form-check-inline">
+      <div class="form-check form-check-inline  <?php if(isset($genreMsgErreur) && !empty($genreMsgErreur)) echo "is-invalid"; ?>" aria-describedby="genreFeedback">
         <input class="form-check-input" type="radio" name="genre" id="genre_homme" value="Homme" <?php if ($isHomme) {
           echo "checked";
         }?>>
         <label class="form-check-label" for="genre">Homme</label>
       </div>
-      <div class="form-check form-check-inline">
+      <div class="form-check form-check-inline <?php if(isset($genreMsgErreur) && !empty($genreMsgErreur)) echo "is-invalid"; ?>" aria-describedby="genreFeedback">
         <input class="form-check-input" type="radio" name="genre" id="genre_femme" value="Femme" <?php if ($isFemme) {
           echo "checked";
         }?>>
         <label class="form-check-label" for="genre">Femme</label>
+      </div>
+      <div id="genreFeedback" class="invalid-feedback">
+          <?php echo $genreMsgErreur; ?>
       </div>
       <div class="form-group my-3">
         <button type="submit" class="btn btn-primary">Envoyer</button>
