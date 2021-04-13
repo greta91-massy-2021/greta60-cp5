@@ -25,7 +25,9 @@
         <p>Cliquer sur le bouton ci-dessous pour vous identifier :</p>
         <button class="btn btn-success" id="btnLogin" data-toggle="modal" data-target="#staticBackdrop">Se connecter</button>
     </div>
-
+    <div class="text-center">
+        <a href="membre-add-form.php" class="btn btn-primary">Ajouter un membre</a>
+    </div>
     <section id="team" class="d-flex flex-wrap">
         <div class="card m-3" style="width:15rem">
             <img src="pics/boys.jpg" alt="" class="card-img-top">

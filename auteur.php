@@ -7,10 +7,13 @@ if (is_int($numero) and array_key_exists($numero,$auteurs)) {
   //demarrer la session
   session_start();
   //memoriser le temps unix de la derniere visite de l'utilisateur
-  $_SESSION['visites'][$numero]=time();
+  $_SESSION['visites'][$numero]=time();//50, 48, 78, 54
+  // var_dump($_SESSION['visites']);
   //trier  les trois premiers éléments du tableau des auteurs visités, attention a preserver les clés.
-    arsort($_SESSION['visites'], SORT_NUMERIC);
+    arsort($_SESSION['visites'], SORT_NUMERIC);//78, 54, 50, 48
+    // var_dump($_SESSION['visites']);
     $_SESSION['visites']=array_slice($_SESSION['visites'], 0,3,true);
+    // var_dump($_SESSION['visites']);
 }
 ?>
 <!DOCTYPE html>
