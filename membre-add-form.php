@@ -1,5 +1,7 @@
 <?php 
   session_start();
+  //générer le jéton CSRF - à faire
+  
   //vérifier si $_SESSION["membre-add-form-donnees"] n'est pas vide
   $prenom = "";
   $age = "";
@@ -26,6 +28,10 @@
     $genreMsgErreur = isset($_SESSION["membre-add-form-erreurs"]["genre"]) ? $_SESSION["membre-add-form-erreurs"]["genre"] : '';
     unset($_SESSION["membre-add-form-erreurs"]); //flash message
   }
+  if(isset($_SESSION["membre-add-form-erreur-sql"])){
+    $erreurSQL = "Serveur HS";
+    unset($_SESSION["membre-add-form-erreur-sql"]);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +45,14 @@
 <body>
   <div class="container">
     <h1>Ajouter un membre</h1>
+    <?php if(isset($erreurSQL)): ?>
+      <div class="alert alert-danger" role="alert">
+        <?php echo $erreurSQL; ?>
+      </div>
+    <?php endif; ?>
+    <!-- <div class="alert alert-danger <?php //if(!isset($erreurSQL)) echo 'd-none'; ?>" role="alert">
+      <?php //if(isset($erreurSQL)) echo $erreurSQL; ?>
+    </div> -->
     <form action="membre-add-form-traitement.php" method="post">
       <div class="form-group">
         <label for="prenom">Prénom</label>

@@ -4,6 +4,7 @@
 
 switch ($_SERVER['HTTP_HOST']) {
     case 'localhost':
+    case 'greta60cda3':
         define('HOST', 'localhost');
         define('PORT', 3306);
         define('DATA', 'greta60');

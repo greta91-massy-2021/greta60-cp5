@@ -11,9 +11,12 @@ USE greta60
 
 CREATE TABLE users(
 	uid SMALLINT PRIMARY KEY AUTO_INCREMENT,
-	pseudo VARCHAR(20) NOT NULL,
-	mail VARCHAR(255) NOT NULL UNIQUE,
-	pass VARCHAR(255) NOT NULL
+	pseudo VARCHAR
+(20) NOT NULL,
+	mail VARCHAR
+(255) NOT NULL UNIQUE,
+	pass VARCHAR
+(255) NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8
 ;
 
@@ -22,11 +25,13 @@ ALTER TABLE users
 ;
 
 -- DML : ajout des données
-INSERT INTO users(uid, pseudo, mail, pass, active)
+INSERT INTO users
+	(uid, pseudo, mail, pass, active)
 VALUES(1, 'gaston', 'glagaffe@dupuis.be', 'secret123', 0)
 ;
 
-INSERT INTO users(uid, pseudo, mail, pass, active)
+INSERT INTO users
+	(uid, pseudo, mail, pass, active)
 VALUES(2, 'lesly', 'lesly.lodin@baobab-ingenierie.fr', '$ecret_123', 1)
 ;
 
@@ -46,3 +51,13 @@ FROM users
 
 SHOW TABLES
 ;
+CREATE TABLE membre (
+		id int not null primary key AUTO_INCREMENT, 
+		prenom VARCHAR
+(25) not null,
+		age smallint not null,
+		taille decimal
+(3, 2) not null,
+		genre varchar
+(10) not null 
+) engine INNODB DEFAULT CHARSET UTF8;
